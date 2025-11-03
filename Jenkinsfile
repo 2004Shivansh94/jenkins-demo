@@ -1,28 +1,30 @@
 pipeline {
     agent any
 
-    stage('Checkout') {
-    steps {
-        git branch: 'main', url: 'https://github.com/2004Shivansh94/jenkins-demo.git'
-    }
-}
-
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/2004Shivansh94/jenkins-demo.git'
+            }
+        }
 
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                echo 'Building the project...'
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                echo 'Running tests...'
+                sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
+                echo 'Deploying the project...'
             }
         }
     }
